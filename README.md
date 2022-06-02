@@ -2,13 +2,6 @@
 
 Áp dụng các công nghệ big data vào việc lưu trữ và xử lý các dữ liệu trên thị trường chứng khoán (cụ thể là thị trường ở Mỹ).
 
-Nhóm 10:
-- Nguyễn Sơn Tùng 20173449
-- Lê Thành Sơn 20173346
-- Mai Đức Trung 20173417
-- Nguyễn Sĩ Hưởng 20173165
-- Hà Duy Hiếu 20173117
-
 # Tổng quan đề tài:
 
 Kịch bản của thị trường chứng khoán không ngừng chuyển động khi hàng ngày có đến hàng triệu lượt giao dịch. Việc áp dụng xử lý dữ liệu lớn vào môi trường chứng khoán trở thành một công cụ hữu hiệu cho các nhà đầu tư. Các phân tích dữ liệu lớn sẽ giúp các nhà đầu tư đưa ra những quyết định thông minh, hạn chế rủi ro trên môi trường đầy biến động này.
