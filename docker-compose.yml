@@ -12,6 +12,8 @@ services:
       - ./hadoop.env
     ports:
       - "9870:9870"
+    networks:
+    - sparknet
   
   resourcemanager:
     build: ./resourcemanager
@@ -27,7 +29,9 @@ services:
       - ./hadoop.env
     ports:
       - "8089:8088"
-  
+    networks:
+    - sparknet
+
   historyserver:
     build: ./historyserver
     container_name: historyserver
@@ -43,7 +47,9 @@ services:
       - ./hadoop.env
     ports:
       - "8188:8188"
-  
+    networks:
+    - sparknet
+
   nodemanager1:
     build: ./nodemanager
     container_name: nodemanager1
@@ -57,7 +63,9 @@ services:
       - ./hadoop.env
     ports:
       - "8042:8042"
-  
+    networks:
+    - sparknet
+
   datanode1:
     build: ./datanode
     container_name: datanode1
@@ -68,7 +76,9 @@ services:
       - hadoop_datanode1:/hadoop/dfs/data
     env_file:
       - ./hadoop.env
-  
+    networks:
+    - sparknet
+
   datanode2:
     build: ./datanode
     container_name: datanode2
@@ -79,7 +89,9 @@ services:
       - hadoop_datanode2:/hadoop/dfs/data
     env_file:
       - ./hadoop.env
-  
+    networks:
+    - sparknet
+
   datanode3:
     build: ./datanode
     container_name: datanode3
@@ -90,7 +102,9 @@ services:
       - hadoop_datanode3:/hadoop/dfs/data
     env_file:
       - ./hadoop.env
-  
+    networks:
+    - sparknet
+
   datanode4:
     build: ./datanode
     container_name: datanode4
@@ -101,25 +115,32 @@ services:
       - hadoop_datanode4:/hadoop/dfs/data
     env_file:
       - ./hadoop.env
+    networks:
+    - sparknet
+
   pyspark:
-    image: jupyter/pyspark-notebook
+    image: jupyter/pyspark-notebook:spark-3.3.0
     container_name: pyspark-notebook
     ports:
       - "8888:8888"            
     volumes:
       - ./notebook/:/home/jovyan/work/  
-      
+    networks:
+    - sparknet
+
   spark-master:
-    image: bde2020/spark-master:3.0.1-hadoop3.2
+    image: bde2020/spark-master:3.3.0-hadoop3.3
     container_name: spark-master
     ports:
       - 8080:8080
       - 7077:7077
     env_file:
       - ./hadoop.env
-      
+    networks:
+    - sparknet
+
   spark-worker:
-    image: bde2020/spark-worker:3.0.1-hadoop3.2
+    image: bde2020/spark-worker:3.3.0-hadoop3.3
     #container_name: spark-worker1 
     depends_on:
       - spark-master
@@ -129,7 +150,9 @@ services:
       - 8081
     env_file:
       - ./hadoop.env
-  
+    networks:
+    - sparknet
+      
 volumes:
   hadoop_namenode:
   hadoop_datanode1:
@@ -137,3 +160,7 @@ volumes:
   hadoop_datanode3:
   hadoop_datanode4:
   hadoop_historyserver:
+
+networks:
+  sparknet:
+    driver: bridge
